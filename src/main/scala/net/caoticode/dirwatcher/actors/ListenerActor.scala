@@ -1,7 +1,7 @@
-package com.regesta.autowatermark.actors
+package net.caoticode.dirwatcher.actors
 
 import akka.actor.Actor
-import com.regesta.autowatermark.FSListener
+import net.caoticode.dirwatcher.FSListener
 
 class ListenerActor(listener: FSListener) extends Actor {
 	def receive = {

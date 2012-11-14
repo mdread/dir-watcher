@@ -1,4 +1,4 @@
-package com.regesta.autowatermark
+package net.caoticode.dirwatcher
 
 import java.nio.file.Path
 

@@ -1,14 +1,14 @@
-package com.regesta.autowatermark.actors
+package net.caoticode.dirwatcher.actors
 
 import akka.actor._
 import java.io.File
-import com.regesta.autowatermark._
+import net.caoticode.dirwatcher._
+import net.caoticode.dirwatcher.actors.Messages._
 import java.nio.file._
 import java.nio.file.StandardWatchEventKinds._
 import util.control.Breaks._
 import scala.collection.JavaConversions._
 import java.nio.file.attribute.BasicFileAttributes
-import Messages._
 import akka.routing.BroadcastRouter
 
 object MonitorActor {

@@ -1,4 +1,4 @@
-package com.regesta.autowatermark.actors
+package net.caoticode.dirwatcher.actors
 
 import java.nio.file.Path
 
