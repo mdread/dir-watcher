@@ -63,7 +63,10 @@ object ConfDSL {
   }
   
   class PathedString(pathPart: String) {
-    def / (path: Path) = Paths.get(pathPart, path.toString())
+    def / (path: Path) = Option(path) match {
+      case Some(path) => Paths.get(pathPart, path.toString())
+      case None => Paths.get(pathPart)
+    }
   }
   
   implicit def pathToRichPath(path: Path) = new RichPath(path)
