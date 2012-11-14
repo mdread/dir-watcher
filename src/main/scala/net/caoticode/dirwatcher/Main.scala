@@ -23,7 +23,6 @@ object Main extends App {
       Source.fromFile(confPath)("UTF-8").mkString ).mkString("\n")
   
   print("checking and parsing configuration... ")
-  val a = new Eval()
   val confList: List[Config] = new Eval()(confScript)
   
   println("OK")
