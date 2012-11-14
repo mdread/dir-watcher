@@ -8,6 +8,10 @@ import net.caoticode.dirwatcher.actors._
 import java.nio.file.Paths
 import java.nio.file.Path
 
+/**
+ * @author Daniel Camarda (0xcaos@gmail.com)
+ * */
+
 object DirWatcher {
   private lazy val system = ActorSystem("dir-watcher")
   
