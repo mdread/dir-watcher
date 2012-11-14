@@ -46,10 +46,11 @@ object Main extends App {
                 .replaceAllLiterally("${root}", rootPath.toString)
                 .replaceAllLiterally("${relativeToRoot}", rootPath.relativize(path).toString)
               }
+              
               try{
             	  execSeq !
               } catch {
-                case _ =>
+                case e => e.printStackTrace()
               }
             }
             case None => println("none")
