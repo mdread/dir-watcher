@@ -17,10 +17,13 @@ import scala.io.Source
 
 object Main extends App {
   val confPath = if(args.isEmpty) "watcher.conf" else args(0)
-  val confScript = "import net.caoticode.dirwatcher.ConfDSL._\n" + Source.fromFile(confPath)("UTF-8").mkString
+  val confScript = List(
+      "import net.caoticode.dirwatcher.ConfDSL._",
+      "import scala.sys.process._",
+      Source.fromFile(confPath)("UTF-8").mkString ).mkString("\n")
   
   print("checking and parsing configuration... ")
-  
+  val a = new Eval()
   val confList: List[Config] = new Eval()(confScript)
   
   println("OK")
@@ -32,28 +35,10 @@ object Main extends App {
     val listeners = config.events.map {
       case (eventType, action) => {
         val defaultAction: (Path => Unit) = (path: Path) => {
-          val res = try {
-            action(!Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS), path.getFileName().toString())
+          try{
+        	action(rootPath, path)
           } catch {
-            case e: MatchError => None 
-          }
-          
-          res match {
-            case Some(execTemplateSeq) => {
-              import scala.sys.process._
-              val execSeq = execTemplateSeq.map {e => 
-                e.replaceAllLiterally("${file}", path.toString)
-                .replaceAllLiterally("${root}", rootPath.toString)
-                .replaceAllLiterally("${relativeToRoot}", rootPath.relativize(path).toString)
-              }
-              
-              try{
-            	  execSeq !
-              } catch {
-                case e => e.printStackTrace()
-              }
-            }
-            case None => println("none")
+            case e => println(e.getMessage())
           }
         }
         

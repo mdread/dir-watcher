@@ -1,13 +1,16 @@
 package net.caoticode.dirwatcher
 
 import java.nio.file.Path
+import java.nio.file.Files
+import java.nio.file.LinkOption
+import java.nio.file.Paths
 
 /**
  * @author Daniel Camarda (0xcaos@gmail.com)
  * */
 
 object ConfDSL {
-  type EventListener = (Boolean, String) => Option[Seq[String]]
+  type EventListener = (Path, Path) => Unit
   type EventMapping = Map[EventKind, EventListener]
 
   sealed trait EventKind
@@ -51,7 +54,18 @@ object ConfDSL {
     def apply(listeners: (EventKind, EventListener)*): EventMapping = listeners.toMap
   }
 
-  object Exec {
-    def apply(exec: String*): Some[Seq[String]] = Some(exec)
+  class RichPath(pathRef: Path) {
+    def isDir = Files.isDirectory(pathRef, LinkOption.NOFOLLOW_LINKS)
+    def path = pathRef.toString
+    def exists = pathRef.toFile().exists()
+    def parent = pathRef.getParent()
+    def / (pathStr: String) = Paths.get(pathRef.toString(), pathStr)
   }
+  
+  class PathedString(pathPart: String) {
+    def / (path: Path) = Paths.get(pathPart, path.toString())
+  }
+  
+  implicit def pathToRichPath(path: Path) = new RichPath(path)
+  implicit def stringToPathedString(str: String) = new PathedString(str)
 }
