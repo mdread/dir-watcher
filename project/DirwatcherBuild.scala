@@ -12,7 +12,9 @@ object DirwatcherBuild extends Build {
       version := "0.1-SNAPSHOT",
       scalaVersion := "2.9.2",
       resolvers += "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases",
-      libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.3"
+      resolvers += "Twitter Repository" at "http://maven.twttr.com/",
+      libraryDependencies += "com.typesafe.akka" % "akka-actor" % "2.0.3",
+      libraryDependencies += "com.twitter"   % "util-eval"   % "5.3.13"
     )
   )
 }
