@@ -44,9 +44,7 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
 	                for (val event <- key.pollEvents()) {
 		                val kind = event.kind();
 		
-		                // TBD - provide example of how OVERFLOW event is handled
 		                if (kind != OVERFLOW) {
-		                    // Context for directory entry event is the file name of entry
 			                val ev = event.asInstanceOf[WatchEvent[Path]]
 			                val name = ev.context()
 			                val child = dir.resolve(name)
@@ -80,6 +78,9 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
 	              case None => 
 	            }
 		    }
+	    	
+	    	context.children.foreach { context.stop(_) }
+	    	context.stop(self)
 	    }
 	    case _ => 
 	}
