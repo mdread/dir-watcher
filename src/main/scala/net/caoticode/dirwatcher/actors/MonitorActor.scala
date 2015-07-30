@@ -40,12 +40,12 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
         try {
           key = watcher.take();
         } catch {
-          case _ => break
+          case _ : Throwable => break
         }
 
         keys.get(key) match {
           case Some(dir) => {
-            for (val event <- key.pollEvents()) {
+            for (event <- key.pollEvents()) {
               val kind = event.kind();
 
               if (kind != OVERFLOW) {
@@ -65,7 +65,7 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
                     if (Files.isDirectory(child, LinkOption.NOFOLLOW_LINKS))
                       registerAll(child);
                   } catch {
-                    case _ =>
+                    case _ : Throwable =>
                   }
                 }
               }
