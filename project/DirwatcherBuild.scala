@@ -11,7 +11,8 @@ object DirwatcherBuild extends Build {
       organization := "net.caoticode.dirwatcher",
       version := "0.1-SNAPSHOT",
       scalaVersion := "2.11.7",
-      libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.3.12"
+      libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.3.12",
+      libraryDependencies += "com.twitter" %% "util-eval" % "6.26.0"
     )
   )
 }

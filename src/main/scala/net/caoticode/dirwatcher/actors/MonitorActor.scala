@@ -9,7 +9,7 @@ import java.nio.file.StandardWatchEventKinds._
 import util.control.Breaks._
 import scala.collection.JavaConversions._
 import java.nio.file.attribute.BasicFileAttributes
-import akka.routing.BroadcastRouter
+import akka.routing.BroadcastGroup
 
 /**
  * @author Daniel Camarda (0xcaos@gmail.com)
@@ -23,8 +23,9 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
   private val watcher = FileSystems.getDefault().newWatchService()
   private var keys: Map[WatchKey, Path] = Map.empty
   private val lestenerRouter = {
-    val routees: List[ActorRef] = listeners map { l => context.actorOf(Props(new ListenerActor(l))) }
-    context.actorOf(Props[ListenerActor].withRouter(BroadcastRouter(routees = routees)))
+    val routees: List[String] = listeners map { l => context.actorOf(Props(classOf[ListenerActor], l)).path.toStringWithoutAddress }
+    println(routees)
+    context.actorOf(BroadcastGroup(routees).props(), "monitorRouter")
   }
 
   if (recursive)
