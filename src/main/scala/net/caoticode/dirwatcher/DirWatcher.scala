@@ -2,7 +2,7 @@ package net.caoticode.dirwatcher
 
 import akka.actor._
 import akka.pattern.ask
-import akka.util.duration._
+import scala.concurrent.duration._
 import akka.util.Timeout
 import net.caoticode.dirwatcher.actors._
 import java.nio.file.Paths
