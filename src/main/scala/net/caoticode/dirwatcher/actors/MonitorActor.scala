@@ -24,7 +24,6 @@ class MonitorActor(root: Path, recursive: Boolean, listeners: List[FSListener]) 
   private var keys: Map[WatchKey, Path] = Map.empty
   private val lestenerRouter = {
     val routees: List[String] = listeners map { l => context.actorOf(Props(classOf[ListenerActor], l)).path.toStringWithoutAddress }
-    println(routees)
     context.actorOf(BroadcastGroup(routees).props(), "monitorRouter")
   }
 
