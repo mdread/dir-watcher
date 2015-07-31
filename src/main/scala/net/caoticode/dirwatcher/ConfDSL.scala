@@ -54,7 +54,7 @@ object ConfDSL {
     def apply(listeners: (EventKind, EventListener)*): EventMapping = listeners.toMap
   }
 
-  class RichPath(pathRef: Path) {
+  implicit class RichPath(pathRef: Path) {
     def isDir = Files.isDirectory(pathRef, LinkOption.NOFOLLOW_LINKS)
     def path = pathRef.toString
     def exists = pathRef.toFile().exists()
@@ -62,13 +62,11 @@ object ConfDSL {
     def / (pathStr: String) = Paths.get(pathRef.toString(), pathStr)
   }
   
-  class PathedString(pathPart: String) {
+  implicit class PathedString(pathPart: String) {
     def / (path: Path) = Option(path) match {
       case Some(path) => Paths.get(pathPart, path.toString())
       case None => Paths.get(pathPart)
     }
   }
   
-  implicit def pathToRichPath(path: Path) = new RichPath(path)
-  implicit def stringToPathedString(str: String) = new PathedString(str)
 }
