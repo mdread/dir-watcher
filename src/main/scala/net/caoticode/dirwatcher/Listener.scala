@@ -31,7 +31,7 @@ trait FSListener {
 }
 
 class FSListenerAdapter extends FSListener {
-  override def onCreate(ref: Path) = Listener.noop
-  override def onDelete(ref: Path) = Listener.noop
-  override def onModify(ref: Path) = Listener.noop
+  override def onCreate(ref: Path) = Listener.noop(null)
+  override def onDelete(ref: Path) = Listener.noop(null)
+  override def onModify(ref: Path) = Listener.noop(null)
 }
