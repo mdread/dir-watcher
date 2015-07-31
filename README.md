@@ -7,5 +7,5 @@ You can use this project either as a library from scala/java or as a stand alone
 
 using it as a library you have more control over the implementation
 of listeners but the stand-anone version is pretty flexible too
-becouse it uses scala itself as a configuration file, with the combination 
+because it uses scala itself as a configuration file, with the combination
 of a simple DSL to implement listeners and watch for events
