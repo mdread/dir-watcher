@@ -54,9 +54,9 @@ object Main extends App {
         }
         
         eventType match {
-          case CREATE => Listener.create(defaultAction)
-          case DELETE => Listener.delete(defaultAction)
-          case MODIFY => Listener.modify(defaultAction)
+          case CREATED => Listener.create(defaultAction)
+          case DELETED => Listener.delete(defaultAction)
+          case MODIFIED => Listener.modify(defaultAction)
         }
       }
     }.toList

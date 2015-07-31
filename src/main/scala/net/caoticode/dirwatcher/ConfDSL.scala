@@ -14,27 +14,27 @@ object ConfDSL {
   type EventMapping = Map[EventKind, EventListener]
 
   sealed trait EventKind
-  case object CREATE extends EventKind
-  case object DELETE extends EventKind
-  case object MODIFY extends EventKind
+  case object CREATED extends EventKind
+  case object DELETED extends EventKind
+  case object MODIFIED extends EventKind
   
   case class Config(path: String, events: EventMapping)
   
   object create {
     def apply(block: EventListener): (EventKind, EventListener) = {
-      (CREATE, block)
+      (CREATED, block)
     }
   }
 
   object delete {
     def apply(block: EventListener): (EventKind, EventListener) = {
-      (DELETE, block)
+      (DELETED, block)
     }
   }
 
   object modify {
     def apply(block: EventListener): (EventKind, EventListener) = {
-      (MODIFY, block)
+      (MODIFIED, block)
     }
   }
 
