@@ -10,7 +10,7 @@ Usage as a library give more control over the implementation of listeners, but t
 ## Build and install
 There are three main options:
 
-1. download the compiled jar and include it in your project, or use it as a stand-alone application. it can be downloaded from the [dist](http://aaa.com) folder.
+1. download the compiled jar and include it in your project, or use it as a stand-alone application. it can be downloaded from the [dist](https://github.com/mdread/dir-watcher/tree/master/dist) folder.
 2. clone the project and build the stand-alone jar with [sbt](http://www.scala-sbt.org/)
 ```bash
 git clone https://github.com/mdread/dir-watcher.git
@@ -71,11 +71,10 @@ Also the `scala.sys.process` package gets imported automatically in the configur
 Run it as any executable file, with the configuration file path as parameter. Ex:
 
 ```bash
-java -jar dir-watcher_0.1.jar watcher.conf
+java -jar dir-watcher-assembly-0.1.0.jar watcher.conf
 ```
 
 ## Usage as library
-general intro
 
 ### Scala
 
@@ -141,7 +140,7 @@ because the watcher system manages a separate thread-pool (with akka) you need t
 
 ### Java
 
-Implement FSListener interface (alternatively extend FSListenerAdapter to override only the event you need) 
+Implement FSListener interface (alternatively extend FSListenerAdapter to override only the event you need)
 
 ```java
 import java.nio.file.Path;
