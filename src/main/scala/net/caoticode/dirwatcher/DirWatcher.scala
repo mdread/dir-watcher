@@ -23,6 +23,7 @@ class DirWatcher(system: ActorSystem) {
   private var watchers: List[ActorRef] = Nil
   private var listenersRef: List[(Path, List[FSListener])] = Nil
   
+  @annotation.varargs
   def watchFor(dir: String, listeners: FSListener*): DirWatcher = {
     watchFor(dir, listeners.toList)
     this
