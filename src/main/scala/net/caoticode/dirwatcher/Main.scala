@@ -21,10 +21,6 @@ import net.caoticode.dirwatcher.actors.MonitorActor
 class EngineType
 
 object Main extends App {
-//  val engine = new ScriptEngineManager().getEngineByName("scala")
-//  val settings = engine.asInstanceOf[scala.tools.nsc.interpreter.IMain].settings
-//  settings.embeddedDefaults[EngineType]
-//  settings.usejavacp.value = true
   
   val confPath = if(args.isEmpty) "watcher.conf" else args(0)
   val confScript = List(
