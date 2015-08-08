@@ -8,25 +8,38 @@ This project can be used both as a stand-alone application, and as a **Scala** o
 Usage as a library give more control over the implementation of listeners, but the stand-alone version is pretty flexible thanks to the use of a *Scala DSL* for configuration.
 
 ## Build and install
-There are three main options:
 
-1. download the compiled jar and include it in your project, or use it as a stand-alone application. it can be downloaded from the [dist](https://github.com/mdread/dir-watcher/tree/master/dist) folder.
+### for stand-alone usage
+
+There are two options:
+
+1. download the compiled jar to use it as a stand-alone application. it can be downloaded from the [dist](https://github.com/mdread/dir-watcher/tree/master/dist) folder.
+
 2. clone the project and build the stand-alone jar with [sbt](http://www.scala-sbt.org/)
-```bash
-git clone https://github.com/mdread/dir-watcher.git
-cd dir-watcher
-sbt assembly
-```
-compiled jar will be in **./target/scala-2.11** directory
-3. clone the project and install it in local repository to use it as a library
-```bash
-git clone https://github.com/mdread/dir-watcher.git
-cd dir-watcher
-sbt publishLocal
-```
-then include it as a dependency in build.sbt
+  ```bash
+  git clone https://github.com/mdread/dir-watcher.git
+  cd dir-watcher
+  sbt assembly
+  ```
+
+  compiled jar will be in **./target/scala-2.11** directory
+
+### for usage as a library
+
+include it as a dependency from sbt / maven
+
+**sbt**
 ```
 libraryDependencies += "net.caoticode.dirwatcher" %% "dir-watcher" % "0.1.0"
+```
+
+**maven**
+```xml
+<dependency>
+  <groupId>net.caoticode.dirwatcher</groupId>
+  <artifactId>dir-watcher_2.11</artifactId>
+  <version>0.1.0</version>
+</dependency>
 ```
 
 ## Usage as stand-alone application
